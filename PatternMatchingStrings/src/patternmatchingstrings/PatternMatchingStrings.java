@@ -20,6 +20,7 @@ public class PatternMatchingStrings {
     public static void main(String[] args) throws FileNotFoundException, IOException {
         String[] patterns = new String[]{"cad", "cccd", "bababbb"};
         
+        //Run Naive search
         NaiveStringMatcher naiveStringMatcher = new NaiveStringMatcher();
         ArrayList<ExecutionStatistics> NaiveExecutionStatistics = new ArrayList<>();
         
@@ -32,6 +33,21 @@ public class PatternMatchingStrings {
         for(int i = 0; i < patterns.length; i++) {
             System.out.println(patterns[i].toString()+":");
             System.out.println(NaiveExecutionStatistics.get(i).getRunTime());
+        }
+        
+        //Run Finite Algorithm search
+        FiniteAutomataStringMatcher finiteAutomataStringMatcher = new FiniteAutomataStringMatcher();
+        ArrayList<ExecutionStatistics> FiniteAutomatatStatistics = new ArrayList<>();
+        
+        System.out.println("PATTERN LOCATIONS:");
+        for(int i = 0; i < patterns.length; i++) {
+            System.out.println(patterns[i].toString()+":");
+            FiniteAutomatatStatistics.add(finiteAutomataStringMatcher.findPattern(patterns[i].toCharArray()));
+        }
+        System.out.println("\nSTATISTICS:");
+        for(int i = 0; i < patterns.length; i++) {
+            System.out.println(patterns[i].toString()+":");
+            System.out.println(FiniteAutomatatStatistics.get(i).getRunTime());
         }
     }
 }
